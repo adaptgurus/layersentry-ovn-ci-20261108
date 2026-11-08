@@ -1,0 +1,65 @@
+name: Public vendor OVN26 migration fixture
+
+on:
+  push:
+    branches: [main]
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+concurrency:
+  group: public-ovn-vendor-${{ github.ref }}
+  cancel-in-progress: true
+
+jobs:
+  vendor-database-fixture:
+    runs-on: ubuntu-24.04
+    timeout-minutes: 15
+    env:
+      FIXTURE_IMAGE: docker.io/library/almalinux@sha256:465a5007813f19b5ac8a88cd161f3d8dcc6b1958e0c03c31f7c9a1b079d0a7da
+    steps:
+      - name: Read reviewed public fixture
+        uses: actions/checkout@11d5960a326750d5838078e36cf38b85af677262
+        with:
+          persist-credentials: false
+          fetch-depth: 1
+
+      - name: Verify source and pinned container identity
+        shell: bash
+        run: |
+          set -euo pipefail
+          sha256sum --check CONTENTS.sha256
+          python3 -c 'import json, os; assert json.load(open("vendor/artifacts.lock.json"))["container_image"] == os.environ["FIXTURE_IMAGE"]'
+          docker pull --platform linux/amd64 "$FIXTURE_IMAGE"
+          sudo test ! -e "$RUNNER_TEMP/ovn-vendor-fixture"
+          sudo install -d -o 0 -g 0 -m 0700 "$RUNNER_TEMP/ovn-vendor-fixture"
+
+      - name: Verify signed public RPMs and extract selected payloads
+        shell: bash
+        run: |
+          set -euo pipefail
+          docker run --rm --platform linux/amd64 --read-only \
+            --cap-drop=ALL --security-opt=no-new-privileges \
+            --pids-limit=64 --memory=1g --cpus=2 \
+            --tmpfs /tmp:rw,noexec,nosuid,size=64m,mode=1777 \
+            --mount "type=bind,source=$GITHUB_WORKSPACE,target=/src,readonly" \
+            --mount "type=bind,source=$RUNNER_TEMP/ovn-vendor-fixture,target=/work" \
+            --env PYTHONDONTWRITEBYTECODE=1 \
+            "$FIXTURE_IMAGE" python3 /src/vendor/prepare.py \
+            --lock /src/vendor/artifacts.lock.json --root /work/artifacts
+
+      - name: Migrate, translate and restore new Unix databases without network
+        shell: bash
+        run: |
+          set -euo pipefail
+          docker run --rm --platform linux/amd64 --network none --read-only \
+            --cap-drop=ALL --security-opt=no-new-privileges \
+            --pids-limit=64 --memory=1g --cpus=2 \
+            --tmpfs /tmp:rw,noexec,nosuid,size=64m,mode=1777 \
+            --mount "type=bind,source=$GITHUB_WORKSPACE,target=/src,readonly" \
+            --mount "type=bind,source=$RUNNER_TEMP/ovn-vendor-fixture,target=/work" \
+            --env PYTHONDONTWRITEBYTECODE=1 \
+            "$FIXTURE_IMAGE" python3 /src/vendor/qualify.py \
+            --lock /src/vendor/artifacts.lock.json \
+            --artifacts /work/artifacts --root /work/fixture

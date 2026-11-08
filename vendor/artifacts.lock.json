@@ -1,0 +1,202 @@
+{
+  "schema": "ovn-public-vendor-fixture-lock/v1",
+  "container_image": "docker.io/library/almalinux@sha256:465a5007813f19b5ac8a88cd161f3d8dcc6b1958e0c03c31f7c9a1b079d0a7da",
+  "platform": "linux/amd64",
+  "keys": [
+    {
+      "id": "centos-nfv",
+      "filename": "RPM-GPG-KEY-CentOS-SIG-NFV",
+      "url": "https://www.centos.org/keys/RPM-GPG-KEY-CentOS-SIG-NFV",
+      "bytes": 1033,
+      "sha256": "a0d3923427e61b04c1992bf292aab4481f548b9a46ace3e5c689a07c8fb5a882",
+      "fingerprint": "35154228174901BEFA8E69A621465E289D2A76A7"
+    },
+    {
+      "id": "alma9",
+      "filename": "RPM-GPG-KEY-AlmaLinux-9",
+      "url": "https://repo.almalinux.org/almalinux/RPM-GPG-KEY-AlmaLinux-9",
+      "bytes": 3139,
+      "sha256": "387a8be6b70ecff4949d28778bf8abd06231654283b6e9515afc9305a1391458",
+      "fingerprint": "BF18AC2876178908D6E71267D36CB86CB86B3716"
+    }
+  ],
+  "packages": [
+    {
+      "filename": "ovn26.03-26.03.3-54.el9s.x86_64.rpm",
+      "url": "https://mirror.stream.centos.org/SIGs/9-stream/nfv/x86_64/openvswitch-2/Packages/o/ovn26.03-26.03.3-54.el9s.x86_64.rpm",
+      "bytes": 1272033,
+      "sha256": "f4a5fa4fe9466af5dca9e482a3c03090e410eaf5c9d3869f27afcd3be554dec1",
+      "metadata": "ovn26.03|26.03.3|54.el9s|x86_64",
+      "key": "centos-nfv",
+      "root": "candidate",
+      "members": [
+        "usr/bin/ovn-appctl",
+        "usr/bin/ovn-nbctl",
+        "usr/bin/ovn-sbctl"
+      ]
+    },
+    {
+      "filename": "ovn26.03-central-26.03.3-54.el9s.x86_64.rpm",
+      "url": "https://mirror.stream.centos.org/SIGs/9-stream/nfv/x86_64/openvswitch-2/Packages/o/ovn26.03-central-26.03.3-54.el9s.x86_64.rpm",
+      "bytes": 703808,
+      "sha256": "fb14abd890e2153d79f5259cb2d6df251333e3fb11cc86d743084270dc8331f2",
+      "metadata": "ovn26.03-central|26.03.3|54.el9s|x86_64",
+      "key": "centos-nfv",
+      "root": "candidate",
+      "members": [
+        "usr/bin/ovn-northd",
+        "usr/share/ovn/ovn-nb.ovsschema",
+        "usr/share/ovn/ovn-sb.ovsschema"
+      ]
+    },
+    {
+      "filename": "ovn26.03-host-26.03.3-54.el9s.x86_64.rpm",
+      "url": "https://mirror.stream.centos.org/SIGs/9-stream/nfv/x86_64/openvswitch-2/Packages/o/ovn26.03-host-26.03.3-54.el9s.x86_64.rpm",
+      "bytes": 813891,
+      "sha256": "574b20fd96656b4305f88bc89452b6d72983ba2e3b24eb0f3851ca7491bce3fe",
+      "metadata": "ovn26.03-host|26.03.3|54.el9s|x86_64",
+      "key": "centos-nfv",
+      "root": "candidate",
+      "members": [
+        "usr/bin/ovn-controller"
+      ]
+    },
+    {
+      "filename": "ovn25.09-25.09.3-100.el9s.x86_64.rpm",
+      "url": "https://mirror.stream.centos.org/SIGs/9-stream/nfv/x86_64/openvswitch-2/Packages/o/ovn25.09-25.09.3-100.el9s.x86_64.rpm",
+      "bytes": 1251623,
+      "sha256": "907bfef4d85bf8c9611014d0dcd1e0dc6061450e4692f47b06118cd9e23b794e",
+      "metadata": "ovn25.09|25.09.3|100.el9s|x86_64",
+      "key": "centos-nfv",
+      "root": "baseline",
+      "members": [
+        "usr/bin/ovn-appctl",
+        "usr/bin/ovn-nbctl",
+        "usr/bin/ovn-sbctl"
+      ]
+    },
+    {
+      "filename": "ovn25.09-central-25.09.3-100.el9s.x86_64.rpm",
+      "url": "https://mirror.stream.centos.org/SIGs/9-stream/nfv/x86_64/openvswitch-2/Packages/o/ovn25.09-central-25.09.3-100.el9s.x86_64.rpm",
+      "bytes": 659434,
+      "sha256": "c4309fabe5936de8ea080ce66698b3bbeb1aa9bb401c5149077a307760757720",
+      "metadata": "ovn25.09-central|25.09.3|100.el9s|x86_64",
+      "key": "centos-nfv",
+      "root": "baseline",
+      "members": [
+        "usr/bin/ovn-northd",
+        "usr/share/ovn/ovn-nb.ovsschema",
+        "usr/share/ovn/ovn-sb.ovsschema"
+      ]
+    },
+    {
+      "filename": "openvswitch3.5-3.5.3-6.el9s.x86_64.rpm",
+      "url": "https://mirror.stream.centos.org/SIGs/9-stream/nfv/x86_64/openvswitch-2/Packages/o/openvswitch3.5-3.5.3-6.el9s.x86_64.rpm",
+      "bytes": 7482369,
+      "sha256": "47ac544a2df14a18dd1dcb21fbd3e84af03dfcc8eb5c04633a23471fcafe7ed5",
+      "metadata": "openvswitch3.5|3.5.3|6.el9s|x86_64",
+      "key": "centos-nfv",
+      "root": "ovs",
+      "members": [
+        "usr/bin/ovsdb-tool",
+        "usr/bin/ovsdb-client",
+        "usr/sbin/ovsdb-server",
+        "usr/lib64/libovsdb-3.5.so.0",
+        "usr/lib64/libovsdb-3.5.so.0.0.3",
+        "usr/lib64/libopenvswitch-3.5.so.0",
+        "usr/lib64/libopenvswitch-3.5.so.0.0.3"
+      ]
+    },
+    {
+      "filename": "libcap-ng-0.8.2-7.el9.x86_64.rpm",
+      "url": "https://repo.almalinux.org/almalinux/9.8/BaseOS/x86_64/os/Packages/libcap-ng-0.8.2-7.el9.x86_64.rpm",
+      "bytes": 32923,
+      "sha256": "2186dd2969f77d2779b02a98204177439488bf6c87454c5c57296fbda7910e60",
+      "metadata": "libcap-ng|0.8.2|7.el9|x86_64",
+      "key": "alma9",
+      "root": "runtime",
+      "members": [
+        "usr/lib64/libcap-ng.so.0",
+        "usr/lib64/libcap-ng.so.0.0.0"
+      ]
+    },
+    {
+      "filename": "libevent-2.1.13-1.el9_8.x86_64.rpm",
+      "url": "https://repo.almalinux.org/almalinux/9.8/BaseOS/x86_64/os/Packages/libevent-2.1.13-1.el9_8.x86_64.rpm",
+      "bytes": 266918,
+      "sha256": "09dc28d18a416255c059605f60ef03f2196f31d8137caa9ad517040f6f789f1b",
+      "metadata": "libevent|2.1.13|1.el9_8|x86_64",
+      "key": "alma9",
+      "root": "runtime",
+      "members": [
+        "usr/lib64/libevent-2.1.so.7",
+        "usr/lib64/libevent-2.1.so.7.0.2"
+      ]
+    },
+    {
+      "filename": "unbound-libs-1.24.2-3.el9_8.8.x86_64.rpm",
+      "url": "https://repo.almalinux.org/almalinux/9.8/BaseOS/x86_64/os/Packages/unbound-libs-1.24.2-3.el9_8.8.x86_64.rpm",
+      "bytes": 593504,
+      "sha256": "f46b34e195fd7adf5e1a382ee02747cd4d5401815a802944103419962689a65f",
+      "metadata": "unbound-libs|1.24.2|3.el9_8.8|x86_64",
+      "key": "alma9",
+      "root": "runtime",
+      "members": [
+        "usr/lib64/libunbound.so.8",
+        "usr/lib64/libunbound.so.8.1.34"
+      ]
+    },
+    {
+      "filename": "protobuf-c-1.3.3-13.el9.x86_64.rpm",
+      "url": "https://repo.almalinux.org/almalinux/9.8/BaseOS/x86_64/os/Packages/protobuf-c-1.3.3-13.el9.x86_64.rpm",
+      "bytes": 35063,
+      "sha256": "3650a3e5c9c5c37b107f5d950ca1c97f516aac5f452e7ddf7a294264b770e05e",
+      "metadata": "protobuf-c|1.3.3|13.el9|x86_64",
+      "key": "alma9",
+      "root": "runtime",
+      "members": [
+        "usr/lib64/libprotobuf-c.so.1",
+        "usr/lib64/libprotobuf-c.so.1.0.0"
+      ]
+    }
+  ],
+  "expected": {
+    "baseline": {
+      "package_version": "25.09.3-100.el9s",
+      "binary_version": "25.09.5-100.el9s",
+      "nb_schema": "7.12.0",
+      "sb_schema": "21.5.0",
+      "ovs_library": "3.6.2"
+    },
+    "candidate": {
+      "package_version": "26.03.3-54.el9s",
+      "binary_version": "26.03.4-54.el9s",
+      "ovs_library": "3.7.2",
+      "nb_schema": "7.18.0",
+      "sb_schema": "21.8.0"
+    },
+    "database_server_version": "3.5.3-6.el9s"
+  },
+  "version_scope": "Vendor package versions and displayed binary versions are distinct; this does not identify an upstream26.03.4 release tag.",
+  "container_provenance": {
+    "official_documentation": "https://wiki.almalinux.org/containers/docker-images.html",
+    "tag_lookup": "https://hub.docker.com/v2/repositories/library/almalinux/tags/9.8",
+    "selected_tag_at_review": "9.8",
+    "manifest_digest_verified": true,
+    "present_runtime_components": [
+      "Python3.9",
+      "rpm",
+      "rpmkeys",
+      "rpm2cpio",
+      "OpenSSL3.5.8",
+      "libsystemd.so.0",
+      "libnghttp2.so.14"
+    ],
+    "extracted_runtime_components": [
+      "libcap-ng",
+      "libevent",
+      "libunbound",
+      "libprotobuf-c"
+    ]
+  }
+}
