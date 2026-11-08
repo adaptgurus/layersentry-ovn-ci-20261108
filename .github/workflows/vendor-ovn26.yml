@@ -30,7 +30,7 @@ jobs:
         run: |
           set -euo pipefail
           sha256sum --check CONTENTS.sha256
-          python3 -c 'import json, os; assert json.load(open("vendor/artifacts.lock.json"))["container_image"] == os.environ["FIXTURE_IMAGE"]'
+          python3 -c 'import json, os; assert json.load(open("vendor-fixture/artifacts.lock.json"))["container_image"] == os.environ["FIXTURE_IMAGE"]'
           docker pull --platform linux/amd64 "$FIXTURE_IMAGE"
           sudo test ! -e "$RUNNER_TEMP/ovn-vendor-fixture"
           sudo install -d -o 0 -g 0 -m 0700 "$RUNNER_TEMP/ovn-vendor-fixture"
@@ -46,8 +46,8 @@ jobs:
             --mount "type=bind,source=$GITHUB_WORKSPACE,target=/src,readonly" \
             --mount "type=bind,source=$RUNNER_TEMP/ovn-vendor-fixture,target=/work" \
             --env PYTHONDONTWRITEBYTECODE=1 \
-            "$FIXTURE_IMAGE" python3 /src/vendor/prepare.py \
-            --lock /src/vendor/artifacts.lock.json --root /work/artifacts
+            "$FIXTURE_IMAGE" python3 /src/vendor-fixture/prepare.py \
+            --lock /src/vendor-fixture/artifacts.lock.json --root /work/artifacts
 
       - name: Migrate, translate and restore new Unix databases without network
         shell: bash
@@ -60,6 +60,6 @@ jobs:
             --mount "type=bind,source=$GITHUB_WORKSPACE,target=/src,readonly" \
             --mount "type=bind,source=$RUNNER_TEMP/ovn-vendor-fixture,target=/work" \
             --env PYTHONDONTWRITEBYTECODE=1 \
-            "$FIXTURE_IMAGE" python3 /src/vendor/qualify.py \
-            --lock /src/vendor/artifacts.lock.json \
+            "$FIXTURE_IMAGE" python3 /src/vendor-fixture/qualify.py \
+            --lock /src/vendor-fixture/artifacts.lock.json \
             --artifacts /work/artifacts --root /work/fixture

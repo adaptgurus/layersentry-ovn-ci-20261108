@@ -2,7 +2,7 @@
 
 This repository runs the reviewed Linux boot-lock regression subset in a standard GitHub-hosted Ubuntu runner. It is a small, self-contained source fixture derived from source commit `c8841cf0e501b05944e64a2c81de60db02870577`.
 
-A separate [vendor OVN26 fixture](vendor/README.md) verifies exact signed public vendor artifacts and runs real NB/SB migration, northd translation and saved-before-image restoration inside a network-disabled execution container. Its workflow is independent of the boot-lock test counts. Neither workflow installs a product release on an original host or certifies production readiness.
+A separate [vendor OVN26 fixture](vendor-fixture/README.md) verifies exact signed public vendor artifacts and runs real NB/SB migration, northd translation and saved-before-image restoration inside a network-disabled execution container. Its workflow is independent of the boot-lock test counts. Neither workflow installs a product release on an original host or certifies production readiness.
 
 ## What the job proves
 
