@@ -1,0 +1,89 @@
+{
+  "schema": "ovn-public-lock-source-provenance/v1",
+  "source_commit": "c8841cf0e501b05944e64a2c81de60db02870577",
+  "scope": "isolated boot lock regression subset; not full product source or runtime qualification",
+  "source_files": [
+    {
+      "path": "lock/deployment_lock_linux.go",
+      "sha256": "5845c82bed9757f2074f8854bf84b1042852d24ba955cf60da611c5c13c05ee8",
+      "origin_path": "internal/adapters/ovn/deployment_lock_linux.go",
+      "origin_git_blob_sha": "595a1d9573e6613ddaff5bc531a4de3c3784c226",
+      "origin_sha256": "5845c82bed9757f2074f8854bf84b1042852d24ba955cf60da611c5c13c05ee8",
+      "transformation": "none; exact whole source file"
+    },
+    {
+      "path": "lock/deployment_lock_linux_test.go",
+      "sha256": "70d6c20c1a3f4754be51943a0854449c38cc36b14cc41c1a7d477d4b2b6a7af5",
+      "origin_path": "internal/adapters/ovn/deployment_lock_linux_test.go",
+      "origin_git_blob_sha": "f106139d774fae77ba8100b7bef7cf6a97893898",
+      "origin_sha256": "70d6c20c1a3f4754be51943a0854449c38cc36b14cc41c1a7d477d4b2b6a7af5",
+      "transformation": "none; exact whole source file"
+    },
+    {
+      "path": "lock/test_temp_linux_test.go",
+      "sha256": "660dcb89e84778edede76e410800753f3c54667c128ae0c2223834fba3818124",
+      "origin_path": "internal/adapters/ovn/test_temp_linux_test.go",
+      "origin_git_blob_sha": "c176cd6163dc492d6c006ea3f27505604df610ba",
+      "origin_sha256": "660dcb89e84778edede76e410800753f3c54667c128ae0c2223834fba3818124",
+      "transformation": "none; exact whole source file"
+    },
+    {
+      "path": "lock/ancestry_linux.go",
+      "sha256": "3dc09ce407ed9abe144aa74dfdb4c1d5f2952e71f0d2f7772422e4bb296ea9d9",
+      "origin_path": "internal/adapters/ovn/deployment_linux.go",
+      "origin_git_blob_sha": "9ca2b8384693808092b78b5bdcad2f295d5ba641",
+      "origin_sha256": "db2d5bae2c378b847b6ab349eb4b7af46f52be890993910fb081e53de32bdd27",
+      "transformation": "exact validateDeploymentFileAncestors function plus minimal Linux/package/import wrapper; no function-body change",
+      "function": "validateDeploymentFileAncestors",
+      "origin_lines": [
+        880,
+        898
+      ],
+      "extracted_function_sha256": "a50bb29f088161828abcebcca89c723355658a63fe7b022ac8cc19974b674092"
+    }
+  ],
+  "new_scaffolding": [
+    "go.mod",
+    ".github/workflows/qualification.yml",
+    "ci/assert_test_events.py",
+    "README.md",
+    "CONTENTS.sha256"
+  ],
+  "module_dependencies": "standard library only",
+  "source_qualifications_not_claimed": [
+    "complete product source suite",
+    "OVN version upgrade",
+    "deployed database quorum",
+    "tenant traffic",
+    "production readiness"
+  ],
+  "license_notices": [
+    {
+      "origin_repository": "source identified by source_commit",
+      "origin_ref": "c8841cf0e501b05944e64a2c81de60db02870577",
+      "origin_path": "deploy/ovn/packaging/LICENSE",
+      "origin_git_blob_sha": "4187fe6106415cabf4d12f7e57f8138225160dd0",
+      "path": "LICENSE",
+      "sha256": "886ca4f485d26ebda6ffe5646ad1f74b4d4bc0dc6df1a0f1a7ab94e0688ba3c4",
+      "transformation": "none; exact notice"
+    },
+    {
+      "origin_repository": "source identified by source_commit",
+      "origin_ref": "c8841cf0e501b05944e64a2c81de60db02870577",
+      "origin_path": "deploy/ovn/packaging/NOTICE",
+      "origin_git_blob_sha": "d141f9f30a959dcbaa7f5bc4046b172d4dcce020",
+      "path": "NOTICE",
+      "sha256": "b98cf3397f256a5896ed1fb034a91c63e837aafb70708f6460ef7365f96734f5",
+      "transformation": "none; exact notice"
+    },
+    {
+      "origin_repository": "golang/go",
+      "origin_ref": "go1.26.8",
+      "origin_path": "LICENSE",
+      "origin_git_blob_sha": "2a7cf70da6e498df9c11ab6a5eaa2ddd7af34da4",
+      "path": "GO-LICENSE",
+      "sha256": "911f8f5782931320f5b8d1160a76365b83aea6447ee6c04fa6d5591467db9dad",
+      "transformation": "none; exact notice"
+    }
+  ]
+}

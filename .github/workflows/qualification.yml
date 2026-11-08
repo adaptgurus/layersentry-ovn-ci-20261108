@@ -1,0 +1,72 @@
+name: Public OVN boot-lock qualification
+
+on:
+  push:
+    branches: [main]
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+concurrency:
+  group: public-ovn-lock-${{ github.ref }}
+  cancel-in-progress: true
+
+jobs:
+  boot-lock:
+    runs-on: ubuntu-24.04
+    timeout-minutes: 10
+    steps:
+      - name: Read reviewed source
+        uses: actions/checkout@11d5960a326750d5838078e36cf38b85af677262
+        with:
+          persist-credentials: false
+          fetch-depth: 1
+
+      - name: Select exact Go toolchain
+        uses: actions/setup-go@b7ad1dad31e06c5925ef5d2fc7ad053ef454303e
+        with:
+          go-version: '1.26.8'
+          check-latest: false
+          cache: false
+
+      - name: Verify reviewed file identities
+        shell: bash
+        run: |
+          set -euo pipefail
+          sha256sum --check CONTENTS.sha256
+          test "$(go env GOVERSION)" = go1.26.8
+          test "$(go list -m all | wc -l)" -eq 1
+
+      - name: Normal lock regressions with zero skips
+        shell: bash
+        run: |
+          set -euo pipefail
+          go_exe="$(command -v go)"
+          sudo -H env -i PATH=/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin \
+            GOTOOLCHAIN=local GOPROXY=off GOSUMDB=off GOWORK=off \
+            GOPATH=/root/ovn-ci-go GOCACHE=/root/ovn-ci-go-cache CGO_ENABLED=1 \
+            "$go_exe" test -json -count=1 -timeout=3m ./lock \
+            | tee "$RUNNER_TEMP/ovn-lock-normal.jsonl"
+          python3 ci/assert_test_events.py "$RUNNER_TEMP/ovn-lock-normal.jsonl"
+
+      - name: Race lock regressions with zero skips
+        shell: bash
+        run: |
+          set -euo pipefail
+          go_exe="$(command -v go)"
+          sudo -H env -i PATH=/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin \
+            GOTOOLCHAIN=local GOPROXY=off GOSUMDB=off GOWORK=off \
+            GOPATH=/root/ovn-ci-go GOCACHE=/root/ovn-ci-go-cache CGO_ENABLED=1 \
+            "$go_exe" test -race -json -count=1 -timeout=3m ./lock \
+            | tee "$RUNNER_TEMP/ovn-lock-race.jsonl"
+          python3 ci/assert_test_events.py "$RUNNER_TEMP/ovn-lock-race.jsonl"
+
+      - name: Vet isolated source
+        shell: bash
+        env:
+          GOTOOLCHAIN: local
+          GOPROXY: 'off'
+          GOSUMDB: 'off'
+          GOWORK: 'off'
+        run: go vet ./lock

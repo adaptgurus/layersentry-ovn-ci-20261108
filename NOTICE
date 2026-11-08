@@ -1,0 +1,5 @@
+LayerSentry OVN adapter
+
+Proprietary LayerSentry source and packaging; no additional rights granted.
+Includes the Go runtime and standard library, licensed by their authors under BSD-3-Clause.
+The packaged SBOM identifies the exact adapter payload and toolchain. System libraries are external RPM dependencies.
